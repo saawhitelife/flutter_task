@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/message.dart';
 import '../services/network/network_service_base.dart';
 import '../services/service_locator.dart';
-import '../utilities/constants.dart';
 import '../widgets/inbox/app_bar.dart';
+import '../widgets/inbox/fab.dart';
 import '../widgets/inbox/message_tile.dart';
 import '../widgets/inbox/separator.dart';
 
@@ -43,16 +43,7 @@ class InboxScreen extends StatelessWidget {
               );
             }),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.cyanAccent,
-        onPressed: () {},
-        tooltip: 'Increment',
-        child: Image.asset(
-          'assets/images/ic_add_black.png',
-          width: kIconSize,
-          height: kIconSize,
-        ),
-      ),
+      floatingActionButton: InboxFAB(),
     );
   }
 }
