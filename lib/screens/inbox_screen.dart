@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task/models/message.dart';
-import 'package:flutter_task/utilities/constants.dart';
+
+import '../models/message.dart';
 import '../services/network/network_service_base.dart';
 import '../services/service_locator.dart';
+import '../utilities/constants.dart';
 
 ///
-class InboxScreen extends StatefulWidget {
-  @override
-  _InboxScreenState createState() => _InboxScreenState();
-}
-
-class _InboxScreenState extends State<InboxScreen> {
+class InboxScreen extends StatelessWidget {
   final _networkService = serviceLocator<NetworkService>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
