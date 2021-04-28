@@ -5,7 +5,9 @@ import 'services/service_locator.dart';
 
 void main() {
   setupServices();
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 ///

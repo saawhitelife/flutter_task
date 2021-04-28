@@ -4,6 +4,9 @@ import '../models/message.dart';
 import '../services/network/network_service_base.dart';
 import '../services/service_locator.dart';
 import '../utilities/constants.dart';
+import '../widgets/inbox/app_bar.dart';
+import '../widgets/inbox/message_tile.dart';
+import '../widgets/inbox/separator.dart';
 
 ///
 class InboxScreen extends StatelessWidget {
@@ -11,29 +14,7 @@ class InboxScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Image.asset(
-            'assets/images/ic_search_white.png',
-            width: kIconSize,
-            height: kIconSize,
-          ),
-          SizedBox(
-            width: kLargePadding * 2,
-          ),
-          Image.asset(
-            'assets/images/ic_check_circle_white.png',
-            width: kIconSize,
-            height: kIconSize,
-          ),
-          SizedBox(
-            width: kLargePadding,
-          ),
-        ],
-        leading: Container(),
-        leadingWidth: kPictureSize,
-        title: Text('Inbox'),
-      ),
+      appBar: InboxAppBar(),
       body: SafeArea(
         child: FutureBuilder<List<Message>>(
             future: _networkService.getMessages(),
@@ -46,108 +27,9 @@ class InboxScreen extends StatelessWidget {
                   final data = snapshot.data!;
                   return ListView.separated(
                     itemCount: data.length,
-                    separatorBuilder: (_, __) => Padding(
-                      padding: const EdgeInsets.only(
-                          left: kPictureSize + 2 * kPadding),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 1.5,
-                      ),
-                    ),
+                    separatorBuilder: (_, __) => InboxSeparator(),
                     itemBuilder: (context, index) {
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: kPadding,
-                              right: kPadding,
-                              top: kPadding,
-                              bottom: kLargePadding,
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
-                                  shape: BoxShape.circle),
-                              width: kPictureSize,
-                              height: kPictureSize,
-                              child: ClipOval(
-                                child: Image.network(
-                                  data[index].picture,
-                                  fit: BoxFit.cover,
-                                  errorBuilder:
-                                      (context, exception, stackTrace) {
-                                    return Center(
-                                      child: Text(
-                                        data[index].name[0],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline1!
-                                            .copyWith(color: Colors.white),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: kPadding),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${data[index].name}',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline1,
-                                            ),
-                                            SizedBox(
-                                              height: kSmallPadding,
-                                            ),
-                                            Text(
-                                              '${data[index].title}',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle1,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: kLargePadding),
-                                        child: Icon(Icons.star_border),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: kSmallPadding,
-                                  ),
-                                  Text(
-                                    '${data[index].text}',
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      );
+                      return InboxMessageTile(message: data[index]);
                     },
                   );
                 } else {
