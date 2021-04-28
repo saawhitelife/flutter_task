@@ -114,7 +114,7 @@ class InboxScreen extends StatelessWidget {
                                                   .headline1,
                                             ),
                                             SizedBox(
-                                              height: kSmalPadding,
+                                              height: kSmallPadding,
                                             ),
                                             Text(
                                               '${data[index].title}',
@@ -134,7 +134,7 @@ class InboxScreen extends StatelessWidget {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: kSmalPadding,
+                                    height: kSmallPadding,
                                   ),
                                   Text(
                                     '${data[index].text}',

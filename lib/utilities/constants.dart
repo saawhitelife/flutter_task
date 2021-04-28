@@ -1,5 +1,5 @@
 ///
-const kSmalPadding = 4.0;
+const kSmallPadding = 4.0;
 
 ///
 const kPadding = 8.0;

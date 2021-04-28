@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import '../../models/message.dart';
 import 'network_service_base.dart';
 
-// https://raw.githubusercontent.com/vyatsykiv/Flutter-Task/main/users.json
 ///
 class NetworkServiceImpl implements NetworkService {
   Future<List<Message>> getMessages() async {
