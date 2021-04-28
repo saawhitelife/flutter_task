@@ -27,12 +27,12 @@ class InboxAppBar extends StatelessWidget implements PreferredSizeWidget {
     leadingWidth: kPictureSize,
     title: Text('Inbox'),
   );
+
   @override
   Widget build(BuildContext context) {
     return appBar;
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize => appBar.preferredSize;
 }

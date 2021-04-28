@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 import '../../utilities/constants.dart';
 
 ///
 class InboxPicture extends StatelessWidget {
   ///
+  // ignore: non_constant_identifier_names
   const InboxPicture({required this.URL, required this.name});
 
   ///
@@ -21,10 +23,10 @@ class InboxPicture extends StatelessWidget {
       width: kPictureSize,
       height: kPictureSize,
       child: ClipOval(
-        child: Image.network(
-          URL,
+        child: FadeInImage.memoryNetwork(
           fit: BoxFit.cover,
-          errorBuilder: (context, exception, stackTrace) {
+          placeholder: kTransparentImage,
+          imageErrorBuilder: (context, exception, stackTrace) {
             return Center(
               child: Text(
                 name[0],
@@ -35,6 +37,7 @@ class InboxPicture extends StatelessWidget {
               ),
             );
           },
+          image: URL,
         ),
       ),
     );
