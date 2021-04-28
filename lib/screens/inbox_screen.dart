@@ -49,7 +49,10 @@ class InboxScreen extends StatelessWidget {
                     separatorBuilder: (_, __) => Padding(
                       padding: const EdgeInsets.only(
                           left: kPictureSize + 2 * kPadding),
-                      child: Divider(),
+                      child: Divider(
+                        color: Colors.grey,
+                        thickness: 1.5,
+                      ),
                     ),
                     itemBuilder: (context, index) {
                       return Row(
